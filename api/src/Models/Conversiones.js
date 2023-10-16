@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 
+/* El bloque de código `module.exports = (sequelize) => {... }` está exportando una función que define
+un modelo Sequelize llamado "Conversiones". */
 module.exports = (sequelize) => {
   sequelize.define("Conversiones", {
     idCoversion: {

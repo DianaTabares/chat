@@ -22,3 +22,11 @@
 
 1. Usar buenas prácticas de desarrollo
 2. Evitar el uso de herramientas de IA y de generación de código ya que sera revisado.
+
+# BACKEND:
+
+- Aplicacion de nodejs que utiliza express, sequalize para crear modelos de bases de datos y postgres como base de datos.
+
+# FRONTEND:
+
+- Aplicacion de react

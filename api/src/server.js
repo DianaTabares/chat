@@ -1,3 +1,4 @@
+/* Este código está configurando un servidor Express en JavaScript. */
 const express = require("express");
 const router = require("./Routes");
 const morgan = require("morgan");
