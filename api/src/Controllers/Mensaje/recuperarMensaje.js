@@ -15,11 +15,11 @@ const recuperarMensaje = async (id) => {
       where: {
         idUsuario: id,
       },
-      include: [
-        {
-          model: Conversiones,
-        },
-      ],
+      // include: [
+      //   {
+      //     model: Conversiones,
+      //   },
+      // ],
     });
     return datos;
   } catch (error) {

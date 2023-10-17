@@ -1,3 +1,6 @@
+const {
+  autenticarUsuario,
+} = require("../../Controllers/Autenticar/autenticarUsuario");
 /**
  * La función `handlerAuthUsuario` es una función asincrónica que maneja la autenticación del usuario y
  * devuelve un token si tiene éxito; de lo contrario, devuelve un mensaje de error.
@@ -8,10 +11,11 @@
  * @param res - El parámetro `res` es el objeto de respuesta que se utiliza para enviar la respuesta al
  * cliente. Es una instancia de la clase `http.ServerResponse` en Node.js.
  */
+
 const handlerAuthUsuario = async (req, res) => {
   try {
     const { nombre, password } = req.body;
-    const token = await authenticateUser(nombre, password);
+    const token = await autenticarUsuario(nombre, password);
     res.status(200).json(token);
   } catch (error) {
     res.status(401).json({ error: error.message });

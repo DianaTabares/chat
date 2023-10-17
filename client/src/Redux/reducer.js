@@ -1,6 +1,6 @@
 import {
   POST_USUARIOS,
-  GET_USUARIOS,
+  POS_AUTH,
   POST_MENSAJE,
   GET_MENSAJE,
   GET_CAMBIO,
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         respuestaBD: action.payload,
       };
-    case GET_USUARIOS:
+    case POS_AUTH:
       return {
         ...state,
         mostrar: action.payload,

@@ -6,9 +6,9 @@ const { Usuarios } = require("../../db");
  * La función "mostrarUsuario" devuelve todos los usuarios de la colección "Usuarios".
  * @returns La función `mostrarUsuario` devuelve el resultado del método `findAll` del objeto `mostrarUsuarios`.
  */
-const mostrarUsuario = async () => {
+const mostrarUsuarios = async () => {
   return await Usuarios.findAll();
 };
 module.exports = {
-  mostrarUsuario,
+  mostrarUsuarios,
 };

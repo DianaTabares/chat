@@ -1,6 +1,6 @@
 import axios from "axios";
 export const POST_USUARIOS = "POST_USUARIOS";
-export const GET_USUARIOS = "GET_USUARIOS";
+export const POS_AUTH = "POST_AUTH";
 export const GET_MENSAJE = "GET_MENSAJE";
 export const POST_MENSAJE = "POST_MENSAJE";
 export const GET_CAMBIO = "GET_CAMBIO";
@@ -16,12 +16,12 @@ export function postUsuarios(info) {
   };
 }
 
-export function getUsuarios() {
+export function postAUTH(info) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get("http://localhost:3001/auth");
+      const { data } = await axios.get("http://localhost:3001/auth", info);
       return dispatch({
-        type: GET_USUARIOS,
+        type: POS_AUTH,
         payload: data,
       });
     } catch (error) {

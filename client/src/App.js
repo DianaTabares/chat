@@ -1,13 +1,15 @@
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Components/Login.jsx";
 import Chat from "./Components/Chat.jsx";
 
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" component={Login} />
-      <Route path="/chat" component={Chat} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
     </div>
   );
 }

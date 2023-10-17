@@ -9,7 +9,7 @@ const { Mensajes } = require("../../db");
  * @param idUsuario - La identificación del usuario a quien se enviará el mensaje.
  * @returns el objeto de mensaje creado.
  */
-const enviarMensajes = async (contenido, idUsuario) => {
+const enviarMensaje = async (contenido, idUsuario) => {
   try {
     if (!contenido || !idUsuario) {
       throw new Error("Los datos del mensaje son inválidos.");
@@ -23,4 +23,4 @@ const enviarMensajes = async (contenido, idUsuario) => {
     throw error;
   }
 };
-module.exports = { enviarMensajes };
+module.exports = { enviarMensaje };

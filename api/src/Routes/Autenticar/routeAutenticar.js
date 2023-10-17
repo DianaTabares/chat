@@ -6,6 +6,6 @@ const {
 
 const router = require("express").Router();
 
-router.get("/", handlerAuthUsuario);
+router.post("/", handlerAuthUsuario);
 
 module.exports = router;
