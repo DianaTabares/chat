@@ -6,7 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "../src/redux/store.js";
+import store from "../src/Redux/store";
 
 /* El código crea un elemento raíz usando `ReactDOM.createRoot()` y renderiza la aplicación React
 dentro de él. */

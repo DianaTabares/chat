@@ -4,7 +4,7 @@ const {
   handlerAuthUsuario,
 } = require("../../Handler/Autenticar/handlerAuthUsuario.js");
 
-const router = express.Router();
+const router = require("express").Router();
 
 router.get("/", handlerAuthUsuario);
 

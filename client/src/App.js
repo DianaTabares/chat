@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-import { Login } from "./Components/Login.jsx";
-import { Chat } from "./Components/Chat.jsx";
+import Login from "./Components/Login.jsx";
+import Chat from "./Components/Chat.jsx";
 
 function App() {
   return (

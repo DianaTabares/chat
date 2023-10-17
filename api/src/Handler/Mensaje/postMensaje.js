@@ -21,14 +21,16 @@ const { enviarMensaje } = require("../../Controllers/Mensaje/enviarMensaje");
 const postMensaje = async (req, res) => {
   const { contenido, idUsuario } = req.body;
   if (!contenido || !idUsuario) {
-    return res.status(404).send("los campos no deben estar vacios...!");
+    return res.status(404).json("los campos no deben estar vacios...!");
   }
   try {
     const enviar = await enviarMensaje(contenido, idUsuario);
     console.log(enviar);
     return res.status(201).json(enviar);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return res
+      .status(500)
+      .json({ error: "Hubo un error al enviar el mensaje." });
   }
 };
 module.exports = { postMensaje };
