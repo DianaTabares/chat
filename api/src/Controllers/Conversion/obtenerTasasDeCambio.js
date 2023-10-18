@@ -19,23 +19,31 @@ const obtenerTasasDeCambio = async (
   monedaConvertida
 ) => {
   try {
-    const response = await axios.get(`${API_KEY}`);
+    const response = await axios.get(API_KEY);
     if (response.status === 200) {
       const data = response.data;
       const tasaCambio = data.result;
+      console.log("Tasa de cambio:", tasaCambio);
 
-      const nuevaConversion = await Conversiones.create({
-        cantidad,
-        monedaOriginal,
-        cantidadConvertida: tasaCambio,
-        monedaConvertida,
-        tasaConversion: tasaCambio,
-      });
+      if (tasaCambio) {
+        const cantidadConvertida = cantidad * tasaCambio;
+        console.log("Cantidad convertida:", cantidadConvertida);
 
-      return {
-        cantidadConvertida: tasaCambio,
-        nuevaConversion,
-      };
+        const nuevaConversion = await Conversiones.create({
+          cantidad,
+          monedaOriginal,
+          cantidadConvertida,
+          monedaConvertida,
+          tasaConversion: tasaCambio,
+        });
+
+        return {
+          cantidadConvertida,
+          nuevaConversion,
+        };
+      } else {
+        return "Tasa de cambio no válida.";
+      }
     } else {
       return "Error al obtener los datos de conversión.";
     }

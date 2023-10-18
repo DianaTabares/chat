@@ -19,7 +19,6 @@ module.exports = (sequelize) => {
     },
     cantidadConvertida: {
       type: DataTypes.FLOAT,
-      allowNull: false,
     },
     monedaConvertida: {
       type: DataTypes.STRING,

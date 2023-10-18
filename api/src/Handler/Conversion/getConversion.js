@@ -3,7 +3,7 @@ const {
 } = require("../../Controllers/Conversion/obtenerTasasDeCambio");
 
 const getConversion = async (req, res) => {
-  const { cantidad, monedaOriginal, monedaConvertida } = req.query;
+  const { cantidad, monedaOriginal, monedaConvertida } = req.params;
   try {
     const resultado = await obtenerTasasDeCambio(
       cantidad,
