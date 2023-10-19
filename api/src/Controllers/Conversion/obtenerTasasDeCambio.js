@@ -20,10 +20,10 @@ const obtenerTasasDeCambio = async (
 ) => {
   try {
     const response = await axios.get(API_KEY);
+    console.log(monedaConvertida);
     if (response.status === 200) {
       const data = response.data;
-      const tasaCambio = data.result;
-      console.log("Tasa de cambio:", tasaCambio);
+      const tasaCambio = data.data[monedaConvertida].value;
 
       if (tasaCambio) {
         const cantidadConvertida = cantidad * tasaCambio;
