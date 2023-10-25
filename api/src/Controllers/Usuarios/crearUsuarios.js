@@ -11,7 +11,7 @@ const bcryptjs = require("bcryptjs");
  * su cuenta.
  * @returns La función `crearUsuario` devuelve el objeto de usuario recién creado.
  */
-const crearUsuario = async (nombre, password) => {
+const crearUsuarios = async (nombre, password) => {
   try {
     if (!nombre || !password) {
       throw new Error("nombre y contraseña es  requeridos!");
@@ -28,4 +28,4 @@ const crearUsuario = async (nombre, password) => {
     throw error;
   }
 };
-module.exports = { crearUsuario };
+module.exports = { crearUsuarios };

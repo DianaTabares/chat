@@ -1,4 +1,4 @@
-const { crearUsuario } = require("../../Controllers/Usuarios/mostrarUsuarios");
+const { crearUsuarios } = require("../../Controllers/Usuarios/crearUsuarios");
 
 /**
  * La función `postUsuario` es una función asincrónica que crea un nuevo usuario con un nombre y
@@ -20,7 +20,7 @@ const postUsuarios = async (req, res) => {
     return res.status(404).send("los campos no deben estar vacios...!");
   }
   try {
-    const datos = await crearUsuario(nombre, password);
+    const datos = await crearUsuarios(nombre, password);
     console.log(datos);
     return res.status(201).json(datos);
   } catch (error) {

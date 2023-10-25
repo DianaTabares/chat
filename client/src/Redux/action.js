@@ -19,7 +19,7 @@ export function postUsuarios(info) {
 export function postAUTH(info) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get("http://localhost:3001/auth", info);
+      const { data } = await axios.post("http://localhost:3001/auth", info);
       return dispatch({
         type: POS_AUTH,
         payload: data,

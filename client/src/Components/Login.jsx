@@ -2,10 +2,11 @@
  * El componente de inicio de sesión es un formulario que permite a los usuarios ingresar su nombre de
  * usuario y contraseña para iniciar sesión.
  * @returns Se está devolviendo el componente de inicio de sesión.
- */
+ **/
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postUsuarios, getUsuarios } from "../Redux/action";
+import { postUsuarios, postAUTH } from "../Redux/action";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -24,18 +25,20 @@ function Login() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const existeUsuario = nombreUsuario(formData.nombre);
+    const existeUsuario = nombreUsuario(formData.nombre, formData.password);
 
     if (existeUsuario) {
-      dispatch(getUsuarios(existeUsuario));
+      dispatch(postAUTH(existeUsuario));
       navigate("/chat", { replace: true });
     } else {
       dispatch(postUsuarios(formData));
     }
   };
 
-  const nombreUsuario = (nombre) => {
-    return usuarios.find((usuario) => usuario.nombre === nombre);
+  const nombreUsuario = (nombre, password) => {
+    return usuarios.find(
+      (usuario) => usuario.nombre === nombre && usuario.password === password
+    );
   };
   return (
     <div>
