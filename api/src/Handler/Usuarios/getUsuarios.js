@@ -20,8 +20,10 @@ const {
  * JSON que contiene el mensaje de error.
  */
 const getUsuarios = async (req, res) => {
+  const { nombre } = req.query;
+
   try {
-    const usuario = await mostrarUsuarios();
+    const usuario = await mostrarUsuarios(nombre);
     return res.status(200).json(usuario);
   } catch (error) {
     return res.status(500).json({ error: error.message });

@@ -2,6 +2,7 @@
 const { Usuarios } = require("../../db");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 const { CLAVE_AUTH } = process.env;
 
 /**
@@ -18,7 +19,7 @@ const { CLAVE_AUTH } = process.env;
 const autenticarUsuario = async (nombre, password) => {
   try {
     const usuario = await Usuarios.findOne({
-      where: { nombre: nombre },
+      where: { nombre: { [Op.iLike]: nombre } },
     });
     const contraseñaValida = await bcryptjs.compare(password, usuario.password);
 
@@ -43,8 +44,8 @@ const autenticarUsuario = async (nombre, password) => {
           }
           const auth = {
             token,
-            id: usuario.idUser,
-            nombre: usuario.email,
+            id: usuario.idUsuario,
+            nombre: usuario.nombre,
           };
           resolve(auth);
         }

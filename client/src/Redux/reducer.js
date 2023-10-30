@@ -4,9 +4,11 @@ import {
   POST_MENSAJE,
   GET_MENSAJE,
   GET_CAMBIO,
+  GET_USER,
 } from "./action";
 
 const initialState = {
+  usuarios: [],
   respuestaBD: [],
   mostrar: [],
   mensajes: [],
@@ -39,6 +41,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         tasaDeCambio: action.payload,
+      };
+    case GET_USER:
+      return {
+        ...state,
+        usuarios: action.payload,
       };
     default:
       return state;

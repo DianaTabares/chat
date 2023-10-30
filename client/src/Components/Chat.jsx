@@ -1,35 +1,58 @@
 import React, { useState } from "react";
-import { postMensaje } from "../Redux/action";
+import { getTasaCambio } from "../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
+import "./Chat.css";
 
 function Chat() {
   const dispatch = useDispatch();
-  const enviar = useSelector((state) => state.mensajes);
-  const [newMensaje, setMensaje] = useState("");
+  const enviar = useSelector((state) => state.tasaDeCambio);
+  console.log(enviar);
+  const [moneda, setmoneda] = useState(0);
+  const [origenConversion, setOrigenConversion] = useState("USD");
+  const [destinoConversion, setDestinoConversion] = useState("COP");
 
-  const handleEnvioMensaje = () => {
-    if (newMensaje) {
-      dispatch(postMensaje(newMensaje));
-      setMensaje("");
-    }
+  const handleTasaDeCambio = () => {
+    dispatch(getTasaCambio(moneda, origenConversion, destinoConversion));
   };
+
   return (
-    <div>
-      <div>
-        {enviar.map((e, i) => (
-          <div key={i}>{e.text}</div>
-        ))}
+    <div className="chat-container">
+      <div className="result-container">
+        {enviar !== null ? (
+          enviar.map((e, i) => <div key={i}>{e.text}</div>)
+        ) : (
+          <p>Esperando la tasa de cambio...</p>
+        )}
       </div>
-      <div>
-        <input
-          type="text"
-          value={newMensaje}
-          onChange={(e) => setMensaje(e.target.value)}
-          placeholder="Escribe un mensaje..."
-        />
-      </div>
-      <button onClick={handleEnvioMensaje}>Enviar</button>
+      <input
+        type="number"
+        className="chat-input"
+        value={moneda}
+        onChange={(e) => setmoneda(e.target.value)}
+        placeholder="Cantidad"
+      />
+      <select
+        className="chat-select"
+        value={origenConversion}
+        onChange={(e) => setOrigenConversion(e.target.value)}
+      >
+        <option value="USD">USD</option>
+        <option value="COP">COP</option>
+      </select>
+      a
+      <select
+        className="chat-select"
+        value={destinoConversion}
+        onChange={(e) => setDestinoConversion(e.target.value)}
+      >
+        <option value="COP">COP</option>
+        <option value="USD">USD</option>
+      </select>
+      <button className="chat-button" onClick={handleTasaDeCambio}>
+        Enviar
+      </button>
     </div>
   );
 }
+
 export default Chat;
