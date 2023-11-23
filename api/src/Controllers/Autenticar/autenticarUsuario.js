@@ -6,15 +6,14 @@ const { Op } = require("sequelize");
 const { CLAVE_AUTH } = process.env;
 
 /**
- * La función `autenticarUsuario` es una función asincrónica que autentica a un usuario verificando su
- * nombre de usuario y contraseña, y devuelve un token si la autenticación es exitosa.
- * @param nombre - El parámetro "nombre" representa el nombre de usuario o nombre del usuario que
+ * La función `autenticarUsuario` es una función de JavaScript que autentica a un usuario verificando
+ * su nombre de usuario y contraseña, y devuelve un token si la autenticación es exitosa.
+ * @param nombre - El parámetro `nombre` representa el nombre de usuario o nombre del usuario que
  * intenta autenticarse.
  * @param password - El parámetro de contraseña es la contraseña ingresada por el usuario para la
  * autenticación.
- * @returns una Promesa que se resuelve en un objeto que contiene el token, la identificación del
- * usuario y el nombre de usuario si la autenticación es exitosa. Si hay un error durante la creación
- * del token, la Promesa lo rechazará con un mensaje de error.
+ * @returns La función `autenticarUsuario` está devolviendo una Promesa que se resuelve en un objeto
+ * que contiene las propiedades `token`, `id` y `nombre`.
  */
 const autenticarUsuario = async (nombre, password) => {
   try {

@@ -2,8 +2,7 @@
  * El componente de inicio de sesión es un formulario que permite a los usuarios ingresar su nombre de
  * usuario y contraseña para iniciar sesión.
  * @returns Se está devolviendo el componente de inicio de sesión.
- **/
-
+ */
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postUsuarios, postAUTH, getUser } from "../Redux/action";
@@ -43,6 +42,7 @@ function Login() {
   return (
     <div className="container">
       <div className="login-container">
+        <h1>Inicio de Sesion</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="nombre" className="login-label">
             Nombre Usuario

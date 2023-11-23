@@ -1,3 +1,4 @@
+/* Este código define una función reductora para una tienda Redux en JavaScript. */
 import {
   POST_USUARIOS,
   POS_AUTH,
@@ -5,6 +6,7 @@ import {
   GET_MENSAJE,
   GET_CAMBIO,
   GET_USER,
+  LOGOUT,
 } from "./action";
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   respuestaBD: [],
   mostrar: [],
   mensajes: [],
-  tasaDeCambio: null,
+  tasaDeCambio: [],
+  token: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +49,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         usuarios: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
       };
     default:
       return state;

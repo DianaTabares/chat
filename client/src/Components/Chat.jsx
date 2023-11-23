@@ -1,3 +1,6 @@
+/* El código que proporcionó es un componente de React llamado "Chat". Importa dependencias necesarias
+como React, useState, getTasaCambio, useDispatch y useSelector. También importa un archivo CSS
+llamado "Chat.css". */
 import React, { useState } from "react";
 import { getTasaCambio } from "../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
