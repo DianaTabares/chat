@@ -1,59 +1,92 @@
-/* El código que proporcionó es un componente de React llamado "Chat". Importa dependencias necesarias
-como React, useState, getTasaCambio, useDispatch y useSelector. También importa un archivo CSS
-llamado "Chat.css". */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getTasaCambio } from "../Redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import "./Chat.css";
 
 function Chat() {
   const dispatch = useDispatch();
-  const enviar = useSelector((state) => state.tasaDeCambio);
-  console.log(enviar);
-  const [moneda, setmoneda] = useState(0);
+  const mensajes = useSelector((state) => state.mensajes);
+  const [mensaje, setMensaje] = useState("");
+  const [moneda, setMoneda] = useState(0);
   const [origenConversion, setOrigenConversion] = useState("USD");
   const [destinoConversion, setDestinoConversion] = useState("COP");
 
-  const handleTasaDeCambio = () => {
-    dispatch(getTasaCambio(moneda, origenConversion, destinoConversion));
+  useEffect(() => {
+    if (mensajes.length === 0) {
+      setTimeout(() => {
+        const respuestaBot = "¡Hola! ¿En qué puedo ayudarte?";
+        dispatch({ type: "RESPUESTA_BOT", payload: respuestaBot });
+      }, 1000);
+    }
+  }, [mensajes, dispatch]);
+
+  const handleEnviarMensaje = () => {
+    if (moneda === 0) {
+      // Si la cantidad de moneda es cero, solo enviar mensaje
+      dispatch({ type: "ENVIAR_MENSAJE", payload: mensaje });
+      const respuestaBot = `No entiendo "${mensaje}", pero estoy aquí para ayudar.`;
+      dispatch({ type: "RESPUESTA_BOT", payload: respuestaBot });
+    } else {
+      // Si hay una cantidad de moneda, realizar conversión y enviar mensaje
+      dispatch(getTasaCambio(moneda, origenConversion, destinoConversion));
+      const respuestaBot = `Convertir ${moneda} ${origenConversion} a ${destinoConversion}.`;
+      dispatch({ type: "RESPUESTA_BOT", payload: respuestaBot });
+    }
+
+    setMensaje("");
+    setMoneda(0); // Reiniciar cantidad de moneda después de enviar mensaje
   };
 
   return (
     <div className="chat-container">
       <div className="result-container">
-        {enviar !== null ? (
-          enviar.map((e, i) => <div key={i}>{e.text}</div>)
-        ) : (
-          <p>Esperando la tasa de cambio...</p>
-        )}
+        {mensajes.map((msg, i) => (
+          <div
+            key={i}
+            className={msg.type === "usuario" ? "user-message" : "bot-message"}
+          >
+            {msg.text}
+          </div>
+        ))}
       </div>
       <input
-        type="number"
+        type="text"
         className="chat-input"
-        value={moneda}
-        onChange={(e) => setmoneda(e.target.value)}
-        placeholder="Cantidad"
+        value={mensaje}
+        onChange={(e) => setMensaje(e.target.value)}
+        placeholder="Escribe tu mensaje..."
       />
-      <select
-        className="chat-select"
-        value={origenConversion}
-        onChange={(e) => setOrigenConversion(e.target.value)}
-      >
-        <option value="USD">USD</option>
-        <option value="COP">COP</option>
-      </select>
-      a
-      <select
-        className="chat-select"
-        value={destinoConversion}
-        onChange={(e) => setDestinoConversion(e.target.value)}
-      >
-        <option value="COP">COP</option>
-        <option value="USD">USD</option>
-      </select>
-      <button className="chat-button" onClick={handleTasaDeCambio}>
+      <button className="chat-button" onClick={handleEnviarMensaje}>
         Enviar
       </button>
+      {moneda !== 0 && (
+        <div className="conversion-container">
+          <input
+            type="number"
+            className="chat-input"
+            value={moneda}
+            onChange={(e) => setMoneda(e.target.value)}
+            placeholder="Cantidad"
+          />
+          <select
+            className="chat-select"
+            value={origenConversion}
+            onChange={(e) => setOrigenConversion(e.target.value)}
+          >
+            <option value="USD">USD</option>
+            <option value="COP">COP</option>
+          </select>
+          a
+          <select
+            className="chat-select"
+            value={destinoConversion}
+            onChange={(e) => setDestinoConversion(e.target.value)}
+          >
+            <option value="COP">COP</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+      )}
     </div>
   );
 }
